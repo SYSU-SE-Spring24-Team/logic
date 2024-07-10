@@ -1,4 +1,4 @@
-__all__ = ["ATTACK_EFFECT"]
+__all__ = ["ATTACK_EFFECT", "MOVE_EFFECT"]
 
 log_string = {
     "ATTACK": "{source}对{target}造成了{hit_hp}的伤害",
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     '''
     测试
     '''
-    heros = [HERO(name="A", position=(1,2)), HERO(name="B", position=(4,3))]
+    heros = [HERO(name="A", position=(1, 2)), HERO(name="B", position=(4, 3))]
     source = 0
     cnt = 10
     while all(hero.alive for hero in heros) and (cnt := cnt - 1) > 0:
@@ -119,6 +119,7 @@ if __name__ == "__main__":
                                           heros[target].x + 1))
         print(move_effect.log)
 
-        print(*[hero.describe(["name", "now_hp", "position"]) for hero in heros])
+        print(
+            *[hero.describe(["name", "now_hp", "position"]) for hero in heros])
         print("=" * 20)
         source = target

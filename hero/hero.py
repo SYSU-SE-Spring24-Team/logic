@@ -102,13 +102,13 @@ if __name__ == "__main__":
     hero_list = [HERO(params, name=str(i)) for i in range(10)]
     for hero in hero_list:
         print(hero.describe(["name", "max_hp", "now_hp", "attack"]))
+    print("==" * 20)
 
-    ## 优先级为kwargs>params>now_params
     params_list = [{"name": "玩家名称", "max_hp": i * 100} for i in range(7)]
     for hero, params in zip(hero_list, params_list):
+        ## 优先级为kwargs>params>now_params
         hero.set(params, now_hp=5)
 
-    print("==" * 20)
     for hero in hero_list:
         print(hero.describe(["name", "max_hp"]), "now_hp:",hero.now_hp, "'attack':",
               hero.attack)

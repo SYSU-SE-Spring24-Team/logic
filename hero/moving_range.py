@@ -37,6 +37,8 @@ def range_distance(
         x_to = (x_to, x_to + 1)
     if isinstance(y_to, int):
         y_to = (y_to, y_to + 1)
+    if range_limit <= 0:
+        range_limit = x_to[1] + y_to[1]
 
     xy_generator = product(range(*x_to), range(*y_to))
     if range_type == RANGE_TYPE.Manhatten:
