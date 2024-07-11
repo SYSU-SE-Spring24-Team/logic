@@ -65,12 +65,16 @@ flowchart LR
 
 $$
 \begin{align*}
+hit = random() \leq source.hit\_rate \land random() > target.miss\_rate
+\\
+crit = random() \leq source.crit\_rate
+\\
 damage = \begin{cases}
-0 & p_{hit} > source.hit
+0 & miss
 \\
-source.attack - target.defence & p_{hit} \leq source.hit_rate \land p_{crit} > source.crit_rate
+source.attack - target.defence & miss \land \lnot crit
 \\
-source.crit * source.attack - target.defence & p_{hit} \leq source.hit_rate \land p_{crit} \leq source.crit_rate
+source.crit * source.attack - target.defence & miss \land crit
 \end{cases}
 \end{align*}
 $$
