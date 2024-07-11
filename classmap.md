@@ -52,3 +52,25 @@ classDiagram
     HERO <-- ATTACK_EFFECT : 作用于
     HERO <-- MOVE_EFFECT : 作用于
 ```
+
+## 攻击效果
+```mermaid
+flowchart LR
+  attack(攻击力) --> hit{命中}
+  hit -->|未命中| miss(伤害=0)
+  hit -->|命中| crit{会心}
+  crit -->|未暴击| damage1(伤害=攻击力-防御力)
+  crit -->|暴击| damage2(伤害=攻击力*暴击率-防御力)
+```
+
+$$
+\begin{align*}
+damage = \begin{cases}
+0 & p_{hit} > source.hit
+\\
+source.attack - target.defence & p_{hit} \leq source.hit_rate \land p_{crit} > source.crit_rate
+\\
+source.crit * source.attack - target.defence & p_{hit} \leq source.hit_rate \land p_{crit} \leq source.crit_rate
+\end{cases}
+\end{align*}
+$$
