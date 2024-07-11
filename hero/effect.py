@@ -30,9 +30,10 @@ class EFFECT(ABC):
         source:HERO,效果来源
         target:HERO|tuple[int,int]|None,效果目标
         '''
+        self._log = []
+
         self.source = source
         self.target = target
-        self.log = []
         self._work()
 
     @abstractmethod
@@ -47,7 +48,14 @@ class EFFECT(ABC):
         添加日志，会自主使用log_string中的字符串，并使用self.__dict__进行格式化
         log_type:str,日志类型
         '''
-        self.log.append(log_string[log_type].format(**self.__dict__))
+        self._log.append(log_string[log_type].format(**self.__dict__))
+
+    @property
+    def log(self) -> list[str]:
+        '''
+        返回只读日志，使用object.log进行调用
+        '''
+        return self._log
 
 
 class ATTACK_EFFECT(EFFECT):
